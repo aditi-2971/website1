@@ -1,9 +1,9 @@
-import DrawerDialogDemo from "@/app/reply/page";
-export default function(){
+
+export default function demo(){
     return (
         <div>
             hi
-            <DrawerDialogDemo />
+         
         </div>
     )
 }

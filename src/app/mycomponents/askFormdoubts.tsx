@@ -8,7 +8,7 @@ import { ToastAction } from "@/components/ui/toast";
 import { useState } from "react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
-
+import { Checkbox } from "@/components/ui/checkbox"
 import {
   Form,
   FormControl,
@@ -27,6 +27,7 @@ const formSchema = z.object({
   Doubt: z.string().min(30, {
     message: "Doubt must be at least 30 characters.",
   }),
+  seniorOnly: z.boolean().default(false).optional(),
 });
 
 export default function Askdoubt() {
@@ -129,7 +130,7 @@ export default function Askdoubt() {
             <FormItem>
               <FormLabel>Doubt</FormLabel>
               <FormControl>
-                <Textarea className="bg-blue-100 border-blue-500 border-2 w-[900px] h-[8000px]" placeholder="Doubts" {...field} />
+                <Textarea className="bg-blue-100 border-blue-500 border-2 w-[550px] h-[250px]" placeholder="Doubts" {...field} />
               </FormControl>
               <FormDescription>
                 Doubts must be at least 30 characters.
@@ -138,9 +139,28 @@ export default function Askdoubt() {
             </FormItem>
           )}
         />
-        <Button type="submit" size={"lg"} disabled={disabled} className="w-full bg-blue-600">
+
+        <div className=" flex  flex-row justify-between">
+        <FormField
+          control={form.control}
+          name="seniorOnly"
+          render={({ field }) => (
+            <FormItem className="flex flex-row  justify-center rounded-md border gap-4  shadow  px-6 py-2 m-0  pb-3">
+              <FormControl>
+                <Checkbox
+                  checked={field.value}
+                  onCheckedChange={field.onChange}
+                  className=" mt-2"
+                />
+              </FormControl>
+              <FormLabel className=" mt-0 p-0 mb-2">Only Senior</FormLabel>
+            </FormItem>
+          )}
+        />
+        <Button type="submit" size={"lg"} disabled={disabled} className="  w-fit sm:w-1/2 bg-blue-600 p-4">
           Submit
         </Button>
+        </div>
       </form>
     </Form>
   );
